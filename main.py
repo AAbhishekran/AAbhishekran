@@ -2,8 +2,10 @@ import PySimpleGUI as ss
 from jinja2.nodes import Add
 
 import function
+import time
+clock=ss.Text("time",key="time")
 list_box = ss.Listbox(values = function.file(), key="main",size=[45,15])
-Layout = [[ss.Text("This is my todoaap",key="text")],
+Layout = [[ss.Text("This is my todoaap",key="text")],[clock],
           [ss.InputText(tooltip="Enter your todo id her",key="todo"),
            ss.Button("Add")],[list_box,ss.Button("edit",key="edit"),
            ss.Button("complete",key="complete")],[ss.Button("Exit")]
@@ -11,7 +13,9 @@ Layout = [[ss.Text("This is my todoaap",key="text")],
 window = ss.Window(title="Todosaap" , layout=Layout,font=("Bold",10))
 
 while True:
-    event , values = window.read()
+    event , values = window.read(timeout=10)
+    window["time"].update(value=time.strftime("%b %d, %y %H:%M:%S"), text_color="white")
+
     match event:
         case "Add":
             new_todo = values["todo"] + "\n"
