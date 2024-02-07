@@ -6,7 +6,7 @@ list_box = ss.Listbox(values = function.file(), key="main",size=[45,15])
 Layout = [[ss.Text("This is my todoaap",key="text")],
           [ss.InputText(tooltip="Enter your todo id her",key="todo"),
            ss.Button("Add")],[list_box,ss.Button("edit",key="edit"),
-           ss.Button("complete",key="complete")]
+           ss.Button("complete",key="complete")],[ss.Button("Exit")]
           ]
 window = ss.Window(title="Todosaap" , layout=Layout,font=("Bold",10))
 
@@ -36,6 +36,7 @@ while True:
             function.write(todos)
             window["main"].update(values=todos)
             window["todo"].update(value="")
-
+        case "Exit":
+            break
 
 window.close()
