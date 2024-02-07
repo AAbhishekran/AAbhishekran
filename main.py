@@ -21,21 +21,27 @@ while True:
             window["main"].update(values=todos)
             window["todo"].update(value="")
         case "edit":
-            edit_todo=values["main"][0]
-            new_todo=values["todo"] + "\n"
-            todos = function.file()
-            index=todos.index(edit_todo)
-            todos[index]=new_todo
-            function.write(todos)
-            window["main"].update(values=todos)
-            window["todo"].update(value="")
+            try:
+               edit_todo=values["main"][0]
+               new_todo=values["todo"] + "\n"
+               todos = function.file()
+               index=todos.index(edit_todo)
+               todos[index]=new_todo
+               function.write(todos)
+               window["main"].update(values=todos)
+               window["todo"].update(value="")
+            except IndexError:
+                ss.popup("plz select the value for edit")
         case "complete":
-            complete_todo=values["main".strip("\n")][0]
-            todos = function.file()
-            todos.remove(complete_todo)
-            function.write(todos)
-            window["main"].update(values=todos)
-            window["todo"].update(value="")
+           try:
+              complete_todo=values["main".strip("\n")][0]
+              todos = function.file()
+              todos.remove(complete_todo)
+              function.write(todos)
+              window["main"].update(values=todos)
+              window["todo"].update(value="")
+           except IndexError:
+               ss.popup("plz select the value complete")
         case "Exit":
             break
 
